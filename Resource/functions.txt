@@ -1,0 +1,81 @@
+void sieve()
+{
+	int i,j;
+
+	primes[0]=false;
+	primes[1]=false;
+
+	for(i=2;i<=1000;i++)
+	{
+		for(j=i*i;j<=1000000;j+=i)
+		{
+			primes[j]=false;
+		}
+	}
+}
+
+int GCD(int a,int b)
+{
+	if(b==0)
+	{
+		return a;
+	}
+	else
+	{
+		return GCD(b,a%b);
+	}
+}
+
+int count_divisor(int a)
+{
+	int count,pw,i;
+
+	count=1;
+
+	for(i=2;i<=sqrt(a*1.0);i=(i==2?3:i+2))
+	{
+		pw=0;
+
+		while(a%i == 0)
+		{
+			pw++;
+			a/=i;
+		}
+
+		count*= (pw+1);
+	}
+
+	if(a != 1)
+	{
+		count *= 2;
+	}
+
+	return count;
+}
+
+int bigmod(long long x,int y, int z)
+{
+	long long c;
+	if(y==0)
+		return 1;
+	if(y%2==0)
+	{
+		c=bigmod(x,y/2,z);
+
+		return ((c%z)*(c%z))%z;
+	}
+	if(y%2==1)
+	{
+		return ((x%z)*(bigmod(x,y-1,z)%z))%z;
+	}
+
+}
+
+*** Reading int from a string....
+
+	getline(cin, str);
+		istringstream is(str);
+
+		while (is >> num[m++]);
+		
+		
